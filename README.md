@@ -12,7 +12,7 @@ Lo script estrae centinaia (o migliaia) di date di partenza casuali dallo storic
 
 ## Perché questo confronto
 
-Il dibattito "PAC o Lump Sum?" è uno dei più comuni in ambito di investimenti personali. La risposta intuitiva ("distribuire l'ingresso riduce il rischio") è vera solo in parte: statisticamente, il Lump Sum batte il PAC nella maggioranza degli scenari storici, perché tenere capitale fuori dal mercato ha un costo — si perdono i rendimenti positivi durante l'attesa.
+Il dibattito "PAC o Lump Sum?" è uno dei più comuni in ambito di personal finance. La risposta intuitiva ("distribuire l'ingresso riduce il rischio") è vera solo in parte: statisticamente, il Lump Sum batte il PAC nella maggioranza degli scenari storici, perché tenere capitale fuori dal mercato ha un costo — si perdono i rendimenti positivi durante l'attesa.
 
 Questo script quantifica esattamente **quanto spesso** e **in quali condizioni** il PAC conviene, usando dati reali invece di intuizioni.
 
@@ -23,7 +23,6 @@ Numeri ottenuti con i parametri di default e seed riproducibile (`--seed 42`, il
 - Il PAC riduce la varianza dei risultati: meno probabilità di un pessimo risultato, ma anche meno probabilità di un risultato eccezionale.
 - Il PAC "vince" sul Lump Sum quasi esclusivamente quando il mercato **scende** durante la finestra di ingresso (i primi anni del piano). Se il mercato sale durante quella finestra, il Lump Sum ha già incassato quei rendimenti e il PAC parte svantaggiato.
 - Su tutto lo storico disponibile (`--start 0`, dal 1928, che include il crollo del 1929) il PAC batte il Lump Sum nel **18.1%** delle 1000 simulazioni. Limitandosi al dopoguerra (dal 1950, default) scende al **12.7%**.
-- Più lungo è il periodo di accumulo del PAC rispetto all'orizzonte totale dell'investimento, più i due sistemi si assomigliano.
 
 Questi numeri sono deterministici: lanciando lo script con lo stesso seed (il default, se non specifichi `--seed`) ottieni esattamente gli stessi risultati riportati qui.
 
@@ -47,7 +46,7 @@ requirements.txt            # dipendenze Python
 LICENSE                     # licenza MIT
 ```
 
-Il CSV copre ogni giorno di calendario dal 1928 a oggi (weekend e festivi inclusi, con il prezzo dell'ultimo giorno di borsa aperto), così qualunque data casuale generata dalla simulazione ha sempre un prezzo disponibile.
+Il CSV copre ogni giorno di calendario dal 1928 a oggi (weekend e festivi inclusi, con il prezzo dell'ultimo giorno di borsa aperto
 
 ## Come si usa
 
@@ -114,12 +113,6 @@ python3 main.py --help
 **3. Il PAC aiuta quando il mercato scende in fase di ingresso?** — grafico a dispersione che mette in relazione il rendimento del mercato durante la finestra di ingresso del PAC con il vantaggio (o svantaggio) del PAC rispetto al Lump Sum su quella stessa simulazione.
 
 ![Entrata vs vantaggio del PAC](charts/03_entrata_vs_vantaggio.png)
-
-## Limiti noti
-
-- `--frequenza-pac` funziona correttamente solo con valori che dividono esattamente 12 (1, 2, 3, 4, 6, 12): la cadenza delle rate è calcolata come `12 // frequenza` mesi tra un versamento e l'altro.
-- Ogni simulazione è indipendente: le date di partenza sono estratte casualmente e possono sovrapporsi nel tempo tra loro (finestre di 30 anni che si intrecciano), quindi le simulazioni non sono statisticamente indipendenti al 100%.
-- I rendimenti passati non garantiscono risultati futuri: la simulazione descrive cosa è successo storicamente sull'indice S&P 500, non una previsione.
 
 ## Fonte dei dati
 
